@@ -95,12 +95,12 @@ const manaPercent = (props.data.mana / props.data.maxMana) * 100;
 }
 
 .hp-bar .fill {
-  background: #00c16e;
+  background: linear-gradient(to right, #008857, #6f9);
   height: 100%;
 }
 
 .mana-bar .fill {
-  background: #00cfff;
+  background: linear-gradient(to right, #007E7E, #09CDF8);
   height: 100%;
 }
 

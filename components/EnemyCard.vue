@@ -181,7 +181,7 @@
   }
   
   .hp .fill {
-    background: linear-gradient(to right, #0f5, #6f9);
+    background: linear-gradient(to right, #008857, #6f9);
     height: 100%;
     position: absolute;
     top: 0;
@@ -191,7 +191,7 @@
   }
   
   .mp .fill {
-    background: linear-gradient(to right, #0af, #6cf);
+    background: linear-gradient(to right, #007E7E, #09CDF8);
     height: 100%;
     position: absolute;
     top: 0;

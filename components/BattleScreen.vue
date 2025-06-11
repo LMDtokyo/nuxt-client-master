@@ -1,14 +1,36 @@
+<template>
+  <div class="battle-screen">
+    <!-- Кнопки по краям -->
+    <div class="fixed-actions">
+      <LogoutButton />
+      <LocationLabel :location="props.location?.name || 'Неизвестная локация'" />
+    </div>
 
+    <div class="battle-body">
+      <div class="combat-wrapper">
+        <div class="combat-row">
+          <EnemyCard :data="enemyData" />
+        </div>
+
+        <InfoBar :inventory="inventory" />
+        <PlayerCard :data="playerData" />
+      </div>
+
+      <LogBox :logs="logs" />
+    </div>
+  </div>
+</template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import TopBar from '~/components/TopBar.vue'
+
 import EnemyCard from '~/components/EnemyCard.vue'
 import PlayerCard from '~/components/PlayerCard.vue'
 import InfoBar from '~/components/InfoBar.vue'
 import LogBox from '~/components/BattleLog.vue'
+import LogoutButton from '~/components/LogoutButton.vue'
+import LocationLabel from '~/components/LocationLabel.vue'
 
-// Пропсы: локация
 interface LocationData {
   name?: string
   faction?: string
@@ -23,13 +45,11 @@ const props = defineProps<{
   location?: LocationData
 }>()
 
-// Инвентарь игрока
 const inventory = {
   current: 5,
   max: 20
 }
 
-// Данные врага
 const enemyData = computed(() => ({
   name: props.location?.boss || 'Неизвестный',
   level: 10,
@@ -43,7 +63,6 @@ const enemyData = computed(() => ({
   debuffs: ['/icons/pngegg.png', '/icons/pngegg.png']
 }))
 
-// Данные игрока
 const playerData = {
   name: 'Player',
   level: 1,
@@ -58,7 +77,6 @@ const playerData = {
   exp: 60
 }
 
-// Лог боя
 const logs = computed(() => [
   {
     id: 1,
@@ -90,10 +108,29 @@ const logs = computed(() => [
 <style scoped>
 .battle-screen {
   width: 100%;
+  min-height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.4);
   font-family: 'Arial', sans-serif;
+}
+
+/* Фиксированная панель кнопок */
+.fixed-actions {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.fixed-actions > * {
+  pointer-events: auto;
 }
 
 .battle-body {
@@ -115,7 +152,6 @@ const logs = computed(() => [
   border: 2px solid #4B4D5A;
   border-radius: 16px;
   box-sizing: border-box;
-  position: relative;
   min-height: 600px;
 }
 
@@ -134,6 +170,12 @@ const logs = computed(() => [
 
   .combat-wrapper {
     padding: 15px;
+  }
+
+  .fixed-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 }
 </style>

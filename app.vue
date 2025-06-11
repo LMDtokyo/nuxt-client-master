@@ -8,7 +8,6 @@
       <NuxtPage />
     </NuxtLayout>
   </div>
-  <BattleScreen />
 </template>
 
 <script setup lang='ts'>
